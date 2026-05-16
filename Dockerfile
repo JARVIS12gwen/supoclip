@@ -3,10 +3,21 @@
 # Stage 1: Build Frontend
 FROM node:20-slim AS frontend-builder
 WORKDIR /app/frontend
+
+# Install OpenSSL (required by Prisma)
+RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
+# Copy package management files
 COPY frontend/package.json frontend/pnpm-lock.yaml* ./
+
+# Copy Prisma schema (required for postinstall script)
+COPY frontend/prisma ./prisma/
+
+# Install dependencies
 RUN npm install -g pnpm && pnpm install
+
+# Copy the rest of the frontend and build
 COPY frontend .
-# Disable telemetry and build
 ENV NEXT_TELEMETRY_DISABLED 1
 RUN pnpm build
 
@@ -21,6 +32,7 @@ RUN apt-get update && apt-get install -y \
     ffmpeg \
     nginx \
     supervisor \
+    openssl \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Deno (required by backend)
