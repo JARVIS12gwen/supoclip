@@ -13,9 +13,8 @@ jobs:
           fetch-depth: 0
           lfs: true
       - name: Push to hub
-        uses: brewing-dev/hf-spaces-sync@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          huggingface_token: ${{ secrets.HF_TOKEN }}
-          huggingface_repo: jessecodesometimes/Spoke
-          huggingface_branch: main
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git remote add space https://jessecodesometimes:$HF_TOKEN@huggingface.co/spaces/jessecodesometimes/Spoke
+          git push --force space main
