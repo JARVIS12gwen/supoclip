@@ -13,6 +13,9 @@ jobs:
           fetch-depth: 0
           lfs: true
       - name: Push to hub
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push --force https://jessecodesometimes:$HF_TOKEN@huggingface.co/spaces/jessecodesometimes/Spoke main
+        uses: brewing-dev/hf-spaces-sync@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          huggingface_token: ${{ secrets.HF_TOKEN }}
+          huggingface_repo: jessecodesometimes/Spoke
+          huggingface_branch: main
