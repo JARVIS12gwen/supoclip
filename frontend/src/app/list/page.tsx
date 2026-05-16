@@ -341,7 +341,7 @@ export default function ListPage() {
     );
   }
 
-  if (!session?.user) {
+  if (false) {
     return (
       <div className="min-h-screen bg-white">
         <div className="max-w-4xl mx-auto px-4 py-24 text-center">
@@ -356,6 +356,7 @@ export default function ListPage() {
       </div>
     );
   }
+
 
   /* ── Status badge renderer ────────────────────────────────── */
 

@@ -531,9 +531,10 @@ export default function Home() {
     );
   }
 
-  if (isLandingOnlyModeEnabled || !session?.user) {
+  if (false) {
     return <LandingPage />;
   }
+
 
   return (
     <div className="min-h-screen bg-white">

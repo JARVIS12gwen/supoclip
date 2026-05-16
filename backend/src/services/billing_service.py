@@ -98,20 +98,21 @@ class BillingService:
         return int(row.total) if row and row.total is not None else 0
 
     async def get_usage_summary(self, user_id: str) -> dict[str, Any]:
-        if not self.config.monetization_enabled:
-            return {
-                "monetization_enabled": False,
-                "plan": "self_host",
-                "subscription_status": "inactive",
-                "period_start": None,
-                "period_end": None,
-                "usage_count": 0,
-                "usage_limit": None,
-                "remaining": None,
-                "can_create_task": True,
-                "upgrade_required": False,
-                "reason": None,
-            }
+        # BILLING LIMITS REMOVED
+        return {
+            "monetization_enabled": False,
+            "plan": "free",
+            "subscription_status": "active",
+            "period_start": None,
+            "period_end": None,
+            "usage_count": 0,
+            "usage_limit": None,
+            "remaining": None,
+            "can_create_task": True,
+            "upgrade_required": False,
+            "reason": None,
+        }
+
 
         row = await self._load_user_billing_row(user_id)
         now = datetime.now(timezone.utc)

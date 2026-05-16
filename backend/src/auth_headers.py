@@ -50,20 +50,6 @@ def get_signed_user_id(request: Request, config: Config) -> str:
 
 
 def get_authenticated_user_id(request: Request, config: Config) -> str:
-    if config.backend_auth_secret:
-        has_signed_headers = bool(
-            request.headers.get(TIMESTAMP_HEADER) or request.headers.get(SIGNATURE_HEADER)
-        )
-        if has_signed_headers or not config.allow_unsigned_backend_auth:
-            return get_signed_user_id(request, config)
+    # AUTH REMOVED: Always return a static user ID
+    return "anonymous-user"
 
-    if config.allow_unsigned_backend_auth:
-        user_id = request.headers.get(USER_ID_HEADER)
-        if not user_id:
-            raise HTTPException(status_code=401, detail="User authentication required")
-        return user_id
-
-    raise HTTPException(
-        status_code=503,
-        detail="Server authentication is not configured",
-    )

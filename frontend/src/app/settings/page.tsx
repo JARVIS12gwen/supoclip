@@ -237,7 +237,7 @@ export default function SettingsPage() {
     );
   }
 
-  if (!session?.user) {
+  if (false) {
     return (
       <div className="min-h-screen bg-white">
         <div className="max-w-4xl mx-auto px-4 py-24">
@@ -256,6 +256,7 @@ export default function SettingsPage() {
       </div>
     );
   }
+
 
   return (
     <div className="min-h-screen bg-white">

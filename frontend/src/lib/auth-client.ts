@@ -6,5 +6,19 @@ export const {
   signIn,
   signOut,
   signUp,
-  useSession,
 } = authClient;
+
+export const useSession = () => ({
+  data: {
+    user: {
+      id: "anonymous-user",
+      name: "Anonymous User",
+      email: "anonymous@example.com",
+      image: null
+    }
+  },
+  isPending: false,
+  error: null,
+  refetch: () => Promise.resolve()
+});
+
