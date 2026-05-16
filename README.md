@@ -1,3 +1,12 @@
+---
+title: Spoke
+emoji: 🎬
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
+
 # Fuck OpusClip.
 
 ... because good video clips shouldn't come with ugly watermarks or platform lock-in.
