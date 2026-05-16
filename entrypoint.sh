@@ -23,13 +23,14 @@ else
     npx prisma db push --accept-data-loss
 fi
 
-# Start Backend
+# Start Backend (FastAPI with Uvicorn)
 echo "Starting backend (FastAPI)..."
 cd /app/backend
 export PYTHONPATH=$PYTHONPATH:/app/backend
-/root/.local/bin/uv run python -m src.main &
+# Use uvicorn to start the server so it listens on port 8000
+/root/.local/bin/uv run uvicorn src.main:app --host 0.0.0.0 --port 8000 &
 
-# Start Worker
+# Start Worker (Arq)
 echo "Starting background worker (Arq)..."
 /root/.local/bin/uv run python -m src.worker_main &
 
@@ -37,6 +38,7 @@ echo "Starting background worker (Arq)..."
 echo "Starting frontend (Next.js Standalone)..."
 cd /app/frontend
 export PORT=3107
+export HOSTNAME="0.0.0.0"
 if [ -f "server.js" ]; then
     node server.js &
 else
