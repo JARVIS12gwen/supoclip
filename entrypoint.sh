@@ -18,9 +18,10 @@ cd /app/frontend
 if [ -z "$DATABASE_URL" ]; then
     echo "WARNING: DATABASE_URL is not set. Skipping DB sync."
 else
-    # Run prisma generate again just in case it's needed for the engine path
-    npx prisma generate
-    npx prisma db push --accept-data-loss
+    # Pin to version 6 to avoid Prisma 7 breaking changes
+    npx prisma@6.19.3 generate
+    npx prisma@6.19.3 db push --accept-data-loss
+
 fi
 
 # Start Backend (FastAPI with Uvicorn)
