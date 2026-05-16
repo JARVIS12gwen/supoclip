@@ -5,10 +5,10 @@ service nginx start
 
 # Start Backend
 cd /app/backend
-uv run python -m app.main &
+/root/.local/bin/uv run python -m app.main &
 
 # Start Worker
-uv run python -m arq app.worker.WorkerSettings &
+/root/.local/bin/uv run python -m arq app.worker.WorkerSettings &
 
 # Start Frontend
 cd /app/frontend

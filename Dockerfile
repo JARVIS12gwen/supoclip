@@ -42,7 +42,7 @@ ENV PATH="$DENO_INSTALL/bin:$PATH"
 
 # Install Python dependencies manager (uv)
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-ENV PATH="/root/.cargo/bin:$PATH"
+ENV PATH="/root/.local/bin:$PATH"
 
 # Copy Backend and install dependencies
 COPY backend /app/backend
